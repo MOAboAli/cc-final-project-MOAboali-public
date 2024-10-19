@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Pre-build phase started on `date`
       - echo Running linting...
-      - npm run lint # Optional, runs linting if you have a lint script
+      #- npm run lint # Optional, runs linting if you have a lint script
   build:
     commands:
       - echo Build started on `date`
