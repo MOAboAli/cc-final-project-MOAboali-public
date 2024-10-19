@@ -3,11 +3,29 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo Installing Node.js version 18.x
+      - curl -sL https://deb.nodesource.com/setup_18.x | bash -
+      - apt-get install -y nodejs
+      - echo Installing Angular CLI
+      - npm install -g @angular/cli
+      - echo Installing project dependencies...
       - npm install
+  pre_build:
+    commands:
+      - echo Pre-build phase started on `date`
+      - echo Running linting...
+      - npm run lint # Optional, runs linting if you have a lint script
   build:
     commands:
-      - ng build # Builds the project
+      - echo Build started on `date`
+      - echo Building the Angular app...
+      - ng build --prod # Use production build flag for optimized output
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
 artifacts:
   files:
-    - "**/*"
-  base-directory: dist\frontend\browser # Directory with output files (e.g., React app)
+    - "**/*" # Include all files in the Angular dist folder
+  base-directory: dist/front # Replace with your Angular project folder name
+  discard-paths: yes # This ensures only the built files are packaged
