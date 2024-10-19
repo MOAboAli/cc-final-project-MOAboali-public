@@ -10,11 +10,11 @@ Resources:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub "OAI for CloudFront distribution of cc-MohamedAboali-finalproject-v1"
 
-  # S3 Bucket for React Project
+  # S3 Bucket for Angular Project
   AngularS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "cc-MohamedAboali-finalproject-v1"
+      BucketName: "cc-mohamedaboali-finalproject-v1"
       AccessControl: Private
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -23,7 +23,9 @@ Resources:
         Status: Enabled
       Tags:
         - Key: Name
-          Value: !Ref BucketName
+          Value: "cc-mohamedaboali-finalproject-v1"
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
 
   # S3 Bucket Policy to Allow CloudFront OAI Access
   S3BucketPolicy:
@@ -40,18 +42,17 @@ Resources:
             Action: "s3:GetObject"
             Resource: !Sub "${AngularS3Bucket.Arn}/*"
 
-  # S3 Bucket for React Project
+  # S3 Bucket for Angular Project
   ImageS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "cc-finalproject-img"
-      AccessControl: PublicRead
+      BucketName: "cc-finalproject-img"
       VersioningConfiguration:
         Status: Enabled
       CorsConfiguration:
         CorsRules:
           - AllowedOrigins:
-              - "*" # Adjust this to restrict allowed origins if needed
+              - "*"
             AllowedMethods:
               - GET
               - PUT
@@ -64,9 +65,10 @@ Resources:
             MaxAge: 3000
       Tags:
         - Key: Name
-          Value: !Ref BucketName
+          Value: "cc-finalproject-img"
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
 
-  # S3 Bucket Policy to Allow CloudFront OAI Access
   S3ImageBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -77,10 +79,12 @@ Resources:
           - Sid: Statement1
             Effect: Allow
             Principal: "*"
-            Action: ["s3:PutObject", "s3:GetObject"]
+            Action:
+              - "s3:PutObject"
+              - "s3:GetObject"
             Resource: !Sub "${ImageS3Bucket.Arn}/*"
-  # CloudFront Distribution
-  ReactCloudFrontDistribution:
+
+  AngularCloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
@@ -421,8 +425,8 @@ Outputs:
 
   CloudFrontDistributionID:
     Description: ID of the CloudFront distribution
-    Value: !Ref ReactCloudFrontDistribution
+    Value: !Ref AngularCloudFrontDistribution
 
   CloudFrontDomainName:
     Description: Domain name of the CloudFront distribution
-    Value: !GetAtt ReactCloudFrontDistribution.DomainName
+    Value: !GetAtt AngularCloudFrontDistribution.DomainName
