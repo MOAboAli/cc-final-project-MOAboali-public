@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-12 col-12">
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            @if(!userdata){<h2>Sign Up</h2>}
+            @else{<h2>Edit profile</h2>}
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" class="form-control" formControlName="name" type="text"
+                        placeholder="Enter your name">
+
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" formControlName="email" type="email"
+                        placeholder="Enter your email">
+
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" class="form-control" formControlName="password" type="password"
+                        placeholder="Enter your password">
+
+                </div>
+
+                <!-- Bio Field -->
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" class="form-control" formControlName="bio"
+                        placeholder="Write something about yourself"></textarea>
+                </div>
+                <br />
+
+                <!-- Image Field -->
+                <div class="form-group">
+                    <label for="image">Profile Image</label>
+                    <br />
+                    <input id="image" class="form-control-file" formControlName="image" type="file"
+                        (change)="onImageChange($event)">
+                </div>
+                <br />
+                <div class="p-3 {{messagestatus}}">
+                    {{message}}
+                </div>
+                @if(!userdata){<button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign
+                    Up</button>}
+                @else{<button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Edit
+                    Profile</button>}
+
+                <br />
+
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <br />
+
+  <div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-between">
+      <span class="p-3">Aboali Project for Cloud Computing</span>
+      <div class="d-flex flex-row-reverse">
+
+        @if(!userdata){
+        <a class="nav-item nav-link link-body-emphasis p-3" routerLink="/">Login</a>
+
+        <a class="nav-item nav-link link-body-emphasis p-3" routerLink="/signup">Signup</a>
+        }
+        @else
+        {
+        <button class="nav-item nav-link link-body-emphasis p-3" (click)="onSubmit()">Logout</button>
+        }
+        <a class="nav-item nav-link link-body-emphasis active p-3" routerLink="/">Home</a>
+      </div>
+
+    </nav>
+  </div>
+</div>
+
+
+<div class="container">
+  <br />
+  <router-outlet></router-outlet>
+
+</div>
