@@ -27,5 +27,5 @@ phases:
 artifacts:
   files:
     - "**/*" # Include all files in the Angular dist folder
-  base-directory: dist/front # Replace with your Angular project folder name
+  base-directory: dist/frontend # Replace with your Angular project folder name
   discard-paths: yes # This ensures only the built files are packaged
