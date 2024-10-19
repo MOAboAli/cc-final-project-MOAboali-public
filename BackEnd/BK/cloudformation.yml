@@ -18,10 +18,10 @@ Resources:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub "OAI for CloudFront distribution of ${BucketName}"
+        Comment: !Sub "OAI for CloudFront distribution of cc-MohamedAboali-finalproject-v1"
 
   # S3 Bucket for React Project
-  ReactS3Bucket:
+  AngularS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "cc-MohamedAboali-finalproject-v1"
@@ -39,7 +39,7 @@ Resources:
   S3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref ReactS3Bucket
+      Bucket: !Ref AngularS3Bucket
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -48,7 +48,33 @@ Resources:
             Principal:
               AWS: !Sub "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOAI}"
             Action: "s3:GetObject"
-            Resource: !Sub "${ReactS3Bucket.Arn}/*"
+            Resource: !Sub "${AngularS3Bucket.Arn}/*"
+
+  # S3 Bucket for React Project
+  ImageS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "cc-finalproject-img"
+      AccessControl: Public
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Name
+          Value: !Ref BucketName
+
+  # S3 Bucket Policy to Allow CloudFront OAI Access
+  S3ImageBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ImageS3Bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: Statement1
+            Effect: Allow
+            Principal: "*"
+            Action: ["s3:PutObject", "s3:GetObject"]
+            Resource: !Sub "${ImageS3Bucket.Arn}/*"
 
   # CloudFront Distribution
   ReactCloudFrontDistribution:
@@ -58,7 +84,7 @@ Resources:
         Enabled: true
         Origins:
           - Id: S3Origin
-            DomainName: !GetAtt ReactS3Bucket.RegionalDomainName
+            DomainName: !GetAtt AngularS3Bucket.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
         DefaultCacheBehavior:
@@ -89,7 +115,7 @@ Resources:
 Outputs:
   S3BucketName:
     Description: Name of the S3 bucket
-    Value: !Ref ReactS3Bucket
+    Value: !Ref AngularS3Bucket
 
   CloudFrontDistributionID:
     Description: ID of the CloudFront distribution
