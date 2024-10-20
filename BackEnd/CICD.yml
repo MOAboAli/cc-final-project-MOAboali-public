@@ -81,7 +81,7 @@ Resources:
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: "aws/codebuild/standard:5.0" # Amazon Linux 2 with Node.js 14.x+
+        Image: "aws/codebuild/standard:6.0" # Amazon Linux 2 with Node.js 14.x+
         Type: LINUX_CONTAINER
       Source:
         Type: CODEPIPELINE
