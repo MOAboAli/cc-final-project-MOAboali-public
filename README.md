@@ -1,8 +1,8 @@
 # Description
    - This project consists of:
-    - **FrontEnd**: Built with Angular
-    - **BackEnd**: Implemented using AWS Lambda (serverless architecture)
-    - **Database**: Powered by DynamoDB
+      - **FrontEnd**: Built with Angular
+      - **BackEnd**: Implemented using AWS Lambda (serverless architecture)
+      - **Database**: Powered by DynamoDB
    - The main goal of this project is to deploy the application using the architecture described above on AWS.
 
 
