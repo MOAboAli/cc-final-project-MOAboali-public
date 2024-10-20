@@ -99,9 +99,9 @@ Resources:
         Type: S3
         Location: !Ref CodePipelineArtifactBucket
       Stages:
-        # Source Stage: Get code from GitHub
         - Name: Source
           Actions:
+            # Source Stage: Get code from GitHub
             - Name: GitHub_Source
               ActionTypeId:
                 Category: Source
@@ -114,6 +114,8 @@ Resources:
                 Owner: MOAboAli
                 Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
                 Branch: main
+                OAuthToken: cc-finalproject-oauth
+                # Add your OAuth token here
               RunOrder: 1
 
         # Build Stage: Build the Angular project using CodeBuild
@@ -143,11 +145,10 @@ Resources:
                 Provider: S3
                 Version: 1
               InputArtifacts:
-                - Name: BuildArtifact
+                - Name: BuildArtifact # Ensure this matches the output artifact from the previous stage
               Configuration:
-                S3Bucket: "cc-mohamedaboali-finalproject-v1"
-                S3ObjectKey: "angular-app.zip"
-                Extract: true
+                BucketName: cc-mohamedaboali-finalproject-v1
+                Extract: true # Add this line to specify extraction
               RunOrder: 1
 
 Outputs:
