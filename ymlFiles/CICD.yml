@@ -103,7 +103,6 @@ Resources:
       Stages:
         - Name: Source
           Actions:
-            # Source Stage: Get code from GitHub
             - Name: GitHub_Source
               ActionTypeId:
                 Category: Source
@@ -116,8 +115,6 @@ Resources:
                 Owner: MOAboAli
                 Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
                 Branch: main
-                OAuthToken: 4086ac47d32e685c8d70d7fe9dad559b2edd391f
-                # Add your OAuth token here
               RunOrder: 1
 
         # Build Stage: Build the Angular project using CodeBuild
