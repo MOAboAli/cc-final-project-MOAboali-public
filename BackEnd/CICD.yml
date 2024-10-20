@@ -1,0 +1,156 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AWS CodePipeline for Angular Project Deployment to S3
+
+Resources:
+  # CodePipeline Service Role
+  CodePipelineServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: CodePipelineServiceRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CodePipelinePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:GetBucketLocation
+                  - s3:ListBucket
+                Resource:
+                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali/*"
+                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali"
+              - Effect: Allow
+                Action:
+                  - codebuild:StartBuild
+                  - codebuild:BatchGetBuilds
+                Resource: "*"
+
+  # CodeBuild Service Role
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: CodeBuildServiceRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CodeBuildPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:ListBucket
+                Resource:
+                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali/*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+
+  # Source Artifact Bucket
+  CodePipelineArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: codepipeline-artifacts-aboali
+
+  # CodeBuild Project
+  AngularAppBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: AngularAppBuildProject
+      ServiceRole: !GetAtt CodeBuildServiceRole.Arn
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: "aws/codebuild/standard:5.0" # Amazon Linux 2 with Node.js 14.x+
+        Type: LINUX_CONTAINER
+      Source:
+        Type: CODEPIPELINE
+      Artifacts:
+        Type: CODEPIPELINE
+      Cache:
+        Type: NO_CACHE
+      TimeoutInMinutes: 30
+
+  # CodePipeline
+  AngularAppCodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: AngularAppCodePipeline
+      RoleArn: !GetAtt CodePipelineServiceRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref CodePipelineArtifactBucket
+      Stages:
+        # Source Stage: Get code from GitHub
+        - Name: Source
+          Actions:
+            - Name: GitHub_Source
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: 1
+              OutputArtifacts:
+                - Name: SourceArtifact
+              Configuration:
+                Owner: MOAboAli
+                Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
+                Branch: main
+              RunOrder: 1
+
+        # Build Stage: Build the Angular project using CodeBuild
+        - Name: Build
+          Actions:
+            - Name: Build_Action
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              InputArtifacts:
+                - Name: SourceArtifact
+              OutputArtifacts:
+                - Name: BuildArtifact
+              Configuration:
+                ProjectName: !Ref AngularAppBuildProject
+              RunOrder: 1
+
+        # Deploy Stage: Deploy the build output to S3
+        - Name: Deploy
+          Actions:
+            - Name: S3_Deploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: S3
+                Version: 1
+              InputArtifacts:
+                - Name: BuildArtifact
+              Configuration:
+                S3Bucket: "cc-mohamedaboali-finalproject-v1"
+                S3ObjectKey: "angular-app.zip"
+                Extract: true
+              RunOrder: 1
+
+Outputs:
+  CodePipelineName:
+    Description: Name of the CodePipeline
+    Value: !Ref AngularAppCodePipeline
