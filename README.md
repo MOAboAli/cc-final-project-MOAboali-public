@@ -11,7 +11,7 @@
       - **Database**: Powered by DynamoDB
         1. user table
 
-   - The main goal of this project is to deploy the application using the architecture described below on AWS.
+   - The main goal of this project (Part of AWS Cloud Computing Course) is to deploy the application using the architecture described below on AWS.
 
 
 # Design 
