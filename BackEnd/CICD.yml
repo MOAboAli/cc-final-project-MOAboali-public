@@ -15,7 +15,7 @@ Resources:
               Service: codepipeline.amazonaws.com
             Action: sts:AssumeRole
       Policies:
-        - PolicyName: CodePipelinePolicy
+        - PolicyName: CodePipelineS3AccessPolicy
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -26,8 +26,8 @@ Resources:
                   - s3:GetBucketLocation
                   - s3:ListBucket
                 Resource:
-                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali/*"
-                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali"
+                  - !Sub "arn:aws:s3:::cc-mohamedaboali-finalproject-v1/*"
+                  - !Sub "arn:aws:s3:::codepipeline-artifacts-aboali/*"
               - Effect: Allow
                 Action:
                   - codebuild:StartBuild
@@ -55,9 +55,11 @@ Resources:
                 Action:
                   - s3:PutObject
                   - s3:GetObject
+                  - s3:GetBucketLocation
                   - s3:ListBucket
                 Resource:
-                  - !Sub "arn:aws:s3:::angular-app-s3-bucket-aboali/*"
+                  - !Sub "arn:aws:s3:::cc-mohamedaboali-finalproject-v1/*"
+                  - !Sub "arn:aws:s3:::codepipeline-artifacts-aboali/*"
               - Effect: Allow
                 Action:
                   - logs:CreateLogGroup
@@ -114,7 +116,7 @@ Resources:
                 Owner: MOAboAli
                 Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
                 Branch: main
-                OAuthToken: cc-finalproject-oauth
+                OAuthToken: 4086ac47d32e685c8d70d7fe9dad559b2edd391f
                 # Add your OAuth token here
               RunOrder: 1
 
