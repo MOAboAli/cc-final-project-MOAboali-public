@@ -115,6 +115,7 @@ Resources:
                 Owner: MOAboAli
                 Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
                 Branch: main
+                OAuthToken: 6ee14870cc0d8792b4e24249c1c862431357c058
               RunOrder: 1
 
         # Build Stage: Build the Angular project using CodeBuild
@@ -145,6 +146,7 @@ Resources:
                 Version: 1
               InputArtifacts:
                 - Name: BuildArtifact # Ensure this matches the output artifact from the previous stage
+              OutputArtifacts: []
               Configuration:
                 BucketName: cc-mohamedaboali-finalproject-v1
                 Extract: true # Add this line to specify extraction

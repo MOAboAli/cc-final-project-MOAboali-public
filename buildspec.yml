@@ -7,7 +7,7 @@ phases:
       - npm install
   build:
     commands:
-      - ng build
+      - ng build --output-path=dist/frontend/browser
 
 artifacts:
   files:
