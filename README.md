@@ -1,9 +1,17 @@
 # Description
-   - This project consists of:
+   - This application is consists of:
       - **FrontEnd**: Built with Angular
+        1. LoginPage
+        2. SignUp Page
+        3. Edit Profile Page
+        4. Home Page
       - **BackEnd**: Implemented using AWS Lambda (serverless architecture)
+        1. Signup/Edit Profile
+        2. Login
       - **Database**: Powered by DynamoDB
-   - The main goal of this project is to deploy the application using the architecture described above on AWS.
+        1. user table
+
+   - The main goal of this project is to deploy the application using the architecture described below on AWS.
 
 
 # Design 
@@ -12,7 +20,7 @@
 # Steps
 
 1. Create two IAM roles for CloudFormation
-     * First Role (ex. "cc-finalproject-role"), including the following policies:
+     * First Role, including the following policies:
         * AmazonAPIGatewayAdministrator
         * AmazonAPIGatewayInvokeFullAccess
         * AmazonDynamoDBFullAccess
@@ -23,7 +31,7 @@
         * AWSLambdaExecute
         * CloudFrontFullAccess
         * IAMFullAccess
-    * Second Role (ex. cc-finalproject-role-CICD), including the following policies:
+    * Second Role, including the following policies:
         * AmazonS3FullAccess
         * AWSCodeBuildAdminAccess
         * AWSCodeBuildDeveloperAccess
@@ -33,8 +41,8 @@
 
 
 
-2. go to CloudFormation, create new with  /ymlFiles/cc-finalproject.yml file, using the First Role
-3. in CloudFormation, create new with  /ymlFiles/cc-finalproject-CICD.yml file, using the First Role
+2. Go to CloudFormation, create new stack using  /ymlFiles/cc-finalproject.yml file, and the First Role
+3. In CloudFormation, create new stack using   /ymlFiles/cc-finalproject-CICD.yml file, and the second Role
 4. Your are up and runing !!!!!!!!
 
 * Note: 
