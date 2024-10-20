@@ -1,13 +1,16 @@
 version: 0.2
+
 phases:
   install:
     commands:
-      - echo Installing Dependencies...
-      - npm install
+      - npm install -g @angular/cli
   build:
     commands:
-      - echo Build started on `date`
-      - npm run build -- --prod
+      - ng build --prod
+  post_build:
+    commands:
+      - aws s3 cp dist/my-app s3://my-bucket/
+
 artifacts:
   files:
-    - "dist/frontend/**/*"
+    - dist/my-app/**/*
