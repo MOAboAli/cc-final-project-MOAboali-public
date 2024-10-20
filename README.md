@@ -39,11 +39,11 @@
 
 * Note: 
     if CodePipeline shows an Error in Source stage (unable to reach to github repository not found).
-        1. Fork this project to your account.
-        2. In Pipelines page in CodePipeline, click Edit
-        3. In Source Stage, click edit stage
-        4. In build_action box, click on edit icon
-        5. Click on connect to Github
+    1. Fork this project to your account.
+    2. In Pipelines page in CodePipeline, click Edit
+    3. In Source Stage, click edit stage
+    4. In build_action box, click on edit icon
+    5. Click on connect to Github
     
 
 
