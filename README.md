@@ -1,7 +1,27 @@
 # Design 
 ![alt text](/BackEnd/Ass2.png)
 
-# Frontend
+# Steps
+
+1. Create two roles for CloudFormation
+     * First Role (ex. "cc-finalproject-role"), including the following policies:
+        * AmazonAPIGatewayAdministrator
+        * AmazonAPIGatewayInvokeFullAccess
+        * AmazonDynamoDBFullAccess
+        * AmazonS3FullAccess
+        * AmazonS3ObjectLambdaExecutionRolePolicy
+        * AWSCodePipeline_FullAccess
+        * AWSLambda_FullAccess
+        * AWSLambdaExecute
+        * CloudFrontFullAccess
+        * IAMFullAccess
+
+
+
+
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
 
