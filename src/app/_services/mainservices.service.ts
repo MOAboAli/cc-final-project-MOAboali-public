@@ -14,7 +14,6 @@ export class MainservicesService {
 
   constructor(private http: HttpClient) { }
 
-
   // Sign up
   signup(userData: any): Observable<any> {
 
