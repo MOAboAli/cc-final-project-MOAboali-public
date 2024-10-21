@@ -10,7 +10,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 })
 export class MainservicesService {
 
-  private apiUrl = 'https://v6384y12sc.execute-api.us-east-1.amazonaws.com/dev/'; // Replace with your API endpoint
+  private apiUrl = 'https://gi82u4tmha.execute-api.us-east-1.amazonaws.com/dev/'; // Replace with your API endpoint
 
   constructor(private http: HttpClient) { }
 
