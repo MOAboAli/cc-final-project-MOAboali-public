@@ -14,12 +14,13 @@ export class MainservicesService {
 
   private apiUrl = process.env['API_URL'];//environment.API_URL; // Replace with your API endpoint
 
+
   constructor(private http: HttpClient) { }
 
   // Sign up
 
   signup(userData: any): Observable<any> {
-
+    console.log(this.apiUrl);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.apiUrl + "/signup", userData, { headers });
     // .pipe(
@@ -51,13 +52,13 @@ export class MainservicesService {
 
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);
-    throw new Error('Signup failed, please try again later. Error Message:' + error.message);
+    throw new Error('Failed, please try again later. Error Message:' + error.message);
   }
 
   // Login 
 
   login(userData: any): Observable<any> {
-
+    console.log(this.apiUrl);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.apiUrl + "/login", userData, { headers });
 

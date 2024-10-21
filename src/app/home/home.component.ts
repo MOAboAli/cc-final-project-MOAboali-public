@@ -46,7 +46,7 @@ export class HomeComponent {
         },
         error: (error) => {
           this.message = 'Login failed: ' + error.error.error;
-          console.error('Login failed: ', error.error.error);
+          console.error('Login failed: ', error);
           this.messagestatus = "text-danger";
         }
       });
