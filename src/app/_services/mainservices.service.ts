@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class MainservicesService {
 
-  private apiUrl = process.env['API_URL'];//environment.API_URL; // Replace with your API endpoint
+  private apiUrl = environment.API_URL; //process.env['API_URL'];//
 
 
   constructor(private http: HttpClient) { }
