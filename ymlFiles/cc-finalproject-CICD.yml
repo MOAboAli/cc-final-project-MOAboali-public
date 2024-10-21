@@ -112,12 +112,9 @@ Resources:
               OutputArtifacts:
                 - Name: SourceArtifact
               Configuration:
-                  Repo: cc-final-project-MOAboali-public
-                Branch: main
                 Repo: cc-final-project-MOAboali-public
                 Branch: main
                 Owner: MOAboAli
-                OAuthToken: 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
                 OAuthToken: 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
               RunOrder: 1
 
