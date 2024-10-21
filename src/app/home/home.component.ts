@@ -45,8 +45,8 @@ export class HomeComponent {
           this.router.navigateByUrl('/')
         },
         error: (error) => {
-          this.message = 'Signup failed: ' + error.error.error;
-          console.error('Signup failed: ', error.error.error);
+          this.message = 'Login failed: ' + error.error.error;
+          console.error('Login failed: ', error.error.error);
           this.messagestatus = "text-danger";
         }
       });
