@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class MainservicesService {
 
-  private apiUrl = environment.API_URL; //process.env['API_URL'];//
+  private apiUrl = "https://qdik4ymzmb.execute-api.us-east-1.amazonaws.com/dev"; //environment.API_URLprocess.env['API_URL'];//
 
 
   constructor(private http: HttpClient) { }
