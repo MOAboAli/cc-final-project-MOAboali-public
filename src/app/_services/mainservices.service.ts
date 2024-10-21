@@ -4,13 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainservicesService {
 
-  private apiUrl = 'https://gi82u4tmha.execute-api.us-east-1.amazonaws.com/dev/'; // Replace with your API endpoint
+  private apiUrl = environment.API_URL; // Replace with your API endpoint
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +20,7 @@ export class MainservicesService {
   signup(userData: any): Observable<any> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.apiUrl + "signup", userData, { headers });
+    return this.http.post(this.apiUrl + "/signup", userData, { headers });
     // .pipe(
     //   catchError(this.handleError)
     // );
@@ -56,7 +58,7 @@ export class MainservicesService {
   login(userData: any): Observable<any> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.apiUrl + "login", userData, { headers });
+    return this.http.post(this.apiUrl + "/login", userData, { headers });
 
   }
 
