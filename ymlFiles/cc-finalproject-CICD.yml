@@ -112,10 +112,10 @@ Resources:
               OutputArtifacts:
                 - Name: SourceArtifact
               Configuration:
-                Owner: MOAboAli
-                Repo: https://github.com/MOAboAli/cc-final-project-MOAboali-public
+                  Repo: cc-final-project-MOAboali-public
                 Branch: main
-                OAuthToken: 6ee14111cc0d8792b4e1119c1c862431111c580
+                Owner: MOAboAli
+                OAuthToken: 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
               RunOrder: 1
 
         # Build Stage: Build the Angular project using CodeBuild
