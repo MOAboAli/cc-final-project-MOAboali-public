@@ -115,7 +115,7 @@ Resources:
                 Repo: cc-final-project-MOAboali-public
                 Branch: main
                 Owner: MOAboAli
-                OAuthToken: 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
+                OAuthToken: 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
               RunOrder: 1
 
         # Build Stage: Build the Angular project using CodeBuild
