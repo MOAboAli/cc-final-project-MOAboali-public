@@ -5,7 +5,7 @@ Parameters:
   ApiUrl:
     Type: String
     Description: "The API URL for the Angular app."
-    Default: ""
+    Default: "Invoke URL in API Getway"
 
 Resources:
   # CodePipeline Service Role
