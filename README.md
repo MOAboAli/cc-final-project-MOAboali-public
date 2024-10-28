@@ -43,7 +43,7 @@
 
 2. Go to CloudFormation, create new stack using  /ymlFiles/cc-finalproject.yml file, and the First Role
 3. In CloudFormation, create new stack using   /ymlFiles/cc-finalproject-CICD.yml file, and the second Role
-4. You are up and runing !!!!!!!!
+4. You are up and running !!!!!!!!
 
 * Note: 
     if CodePipeline shows an Error in Source stage (unable to reach to github repository not found).
